@@ -1,19 +1,15 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { Button } from 'antd';
+// import { Button } from 'antd';
 
-import Test from 'component/Test';
+// import Test from 'component/Test';
+import BasicLayout from 'layouts/BasicLayout';
 
-import styles from './index.module.scss';
+// import styles from './index.module.scss';
 
 const Home = () => (
-  <div className={ styles.container }>
-    <div className={ styles.content}>
-    <Button type="primary">Primary</Button>
-        <Test />
-    </div>
-  </div>
+  <BasicLayout />
 );
 
 // Home.propTypes = {
