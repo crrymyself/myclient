@@ -1,4 +1,4 @@
-详情效果请参照网站实际效果 [React APP](http:http://xcwpup.top/home).
+详情效果请参照网站实际效果 [React APP](http://xcwpup.top/home).
 
 ## 一个致力于react架构的项目
 
