@@ -1,4 +1,4 @@
-import React, { Component} from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { compose, applyMiddleware, createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -17,7 +17,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 let middleware;
 if (process.env.NODE_ENV === 'development') {
-  middleware = compose(composeWithDevTools(applyMiddleware(sagaMiddleware)))
+  middleware = compose(composeWithDevTools(applyMiddleware(sagaMiddleware)));
 } else {
   middleware = applyMiddleware(sagaMiddleware);
 }

@@ -1,5 +1,7 @@
-import user from './modules/user/saga';
 import { all, fork } from 'redux-saga/effects';
+
+import user from './modules/user/saga';
+
 
 const allsagas = all([...user]);
 
