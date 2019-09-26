@@ -358,6 +358,9 @@
     ],
   },
   "settings": {
+    "react": {
+      "version": "detect"
+    },
     "import/resolver": {
       "babel-module": {},
       "node": {
