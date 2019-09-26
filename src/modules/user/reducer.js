@@ -3,9 +3,9 @@ const defaultState = {
 };
 
 export default (state = defaultState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case 'SET_USER':
-      return { ...state, user: {...action}};
+      return { ...state, user: { ...action } };
     case 'POST_LOGIN_START':
       return { ...state, loading: true };
     case 'POST_LOGIN_SUCCESS':
@@ -15,4 +15,4 @@ export default (state = defaultState, action) => {
     default:
       return state;
   }
-}
+};
