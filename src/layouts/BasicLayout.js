@@ -1,36 +1,45 @@
-import React from 'react';
-import { Layout, Menu, Breadcrumb } from 'antd';
+import React, { Component } from 'react';
+import { Layout, BackTop } from 'antd';
+import PropTypes from 'prop-types';
 
-import logo from 'static/home.jpg';
+import Nav from 'component/GolbalNav';
+import styles from './BasicLayout.module.scss';
 
-const { Header, Content, Footer } = Layout;
+const { Content, Footer } = Layout;
 
-const BasicLayout = () => (
-  <Layout>
-    <Header style={ { position: 'fixed', zIndex: 1, width: '100%' } }>
-      <Menu
-        defaultSelectedKeys={ ['2'] }
-        mode='horizontal'
-        style={ { lineHeight: '64px' } }
-        theme='dark'>
-        <Menu.Item key='1'>nav 1</Menu.Item>
-        <Menu.Item key='2'>nav 2</Menu.Item>
-        <Menu.Item key='3'>nav 3</Menu.Item>
-      </Menu>
-    </Header>
-    <Content style={ { padding: '0 50px', marginTop: 64 } }>
-      <Breadcrumb style={ { margin: '16px 0' } }>
-        <Breadcrumb.Item>
-          Home
-          <img alt='' src={ logo } />
-        </Breadcrumb.Item>
-        <Breadcrumb.Item>List</Breadcrumb.Item>
-        <Breadcrumb.Item>App</Breadcrumb.Item>
-      </Breadcrumb>
-      <div style={ { background: '#fff', padding: 24, minHeight: 380 } }>Content</div>
-    </Content>
-    <Footer style={ { textAlign: 'center' } }>Ant Design ©2018 Created by Ant UED</Footer>
-  </Layout>
-);
+class Layouts extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
-export default BasicLayout;
+  render() {
+    return (
+      <div className={ styles.layouts }>
+        <div>
+          <Nav pathname={ this.props.location.pathname } />
+          <Layout className={ styles.layout }>
+            <Content>
+              <Layout style={ { padding: '24px 0', background: '#fff' } }>
+                <Content style={ { padding: '0 24px 0 0', minHeight: 280 } }>
+                  {this.props.children}
+                </Content>
+              </Layout>
+            </Content>
+          </Layout>
+          <Footer style={ { textAlign: 'center', background: '#fff' } }>
+            Things did not change overnight, but I am getting there!
+          </Footer>
+          <BackTop />
+        </div>
+      </div>
+    );
+  }
+}
+
+Layouts.propTypes = {
+  children: PropTypes.any,
+  location: PropTypes.object,
+};
+
+export default Layouts;
