@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { Layout, Icon, Menu, Row, Col } from 'antd';
+import { Layout, Icon, Menu, Row, Col, Button } from 'antd';
 import PropTypes from 'prop-types';
+
+import HeaderSearch from 'component/HeadSeach';
 
 import logo from 'assets/favicon.ico';
 import styles from './index.module.scss';
@@ -42,14 +44,14 @@ class Nav extends Component {
           borderBottom: '1px solid #eee',
         } }>
         <Row className={ styles.container }>
-          <Col style={ { width: '120px', float: 'left' } }>
+          <Col span='4'>
             <a href='http://xcwpup.top'>
               <div className='logo '>
                 <img alt='' src={ logo } />
               </div>
             </a>
           </Col>
-          <Col style={ { width: '780px', float: 'left' } }>
+          <Col span='8'>
             <Menu
               defaultSelectedKeys={ ['1'] }
               mode='horizontal'
@@ -70,6 +72,25 @@ class Nav extends Component {
                 </Link>
               </Menu.Item>
             </Menu>
+          </Col>
+          <Col span='6'>
+            <HeaderSearch
+              className={ `${styles.action} ${styles.search}` }
+              dataSource={ ['搜索提示一', '搜索提示二', '搜索提示三'] }
+              onPressEnter={ value => {
+                console.log('enter', value) // eslint-disable-line
+              } }
+              onSearch={ value => {
+                console.log('input', value) // eslint-disable-line
+              } }
+              // eslint-disable-next-line react/jsx-tag-spacing
+              placeholder='站内搜索'/>
+          </Col>
+          <Col span='4'>
+            <Button style={ { marginRight: 20 } } type='primary'>
+              Login in
+            </Button>
+            <Button type='primary'>Login out</Button>
           </Col>
         </Row>
       </Header>
@@ -95,13 +116,13 @@ class Nav extends Component {
     this.setState({
       menuCurrent: e.key,
     });
-  };
+  }
 
   menuClick = ({ key }) => {
     this.setState({
       nav: key,
     });
-  };
+  }
 }
 
 Nav.propTypes = {

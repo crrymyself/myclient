@@ -1,7 +1,7 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-// import { Button } from 'antd';
+import { Button } from 'antd';
 
 // import Test from 'component/Test';
 
@@ -9,7 +9,9 @@ import { withRouter } from 'react-router-dom';
 
 const Home = () => (
   // <BasicLayout />
-  <div>蔡仔仔</div>
+  <div>
+    <Button type='primary'>Primary</Button>
+  </div>
 );
 
 // Home.propTypes = {
