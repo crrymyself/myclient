@@ -5,3 +5,27 @@
     border: none;
   }
 }
+.headerNav {
+  background: #fff !important;
+  padding: 5px 0;
+  margin-bottom: 5px;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  box-shadow: 0 1px 3px rgba(26,26,26,.1);
+  z-index: 100;
+  overflow: hidden;
+  // .solid {
+  //   position: relative;
+  //   top:0px;
+  //   transition: top 1s linear;
+  // }
+}
+.headerContent {
+  width: 70%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+

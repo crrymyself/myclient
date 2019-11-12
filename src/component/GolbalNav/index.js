@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
+/* eslint-disable consistent-return */
+import React, { Component, Fragment } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { Layout, Icon, Menu, Row, Col, Button } from 'antd';
+import { Layout, Icon, Menu, Button, Badge, Dropdown, message } from 'antd';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
-import HeaderSearch from 'component/HeadSeach';
-
-import logo from 'assets/favicon.ico';
+import Fabu from 'component/Article/Fabu';
+import Registered from 'component/User/Registered';
+import Login from 'component/User/Login';
 import styles from './index.module.scss';
 
 const { Header } = Layout;
@@ -15,8 +17,13 @@ class Nav extends Component {
     super(props);
     this.state = {
       menuCurrent: '',
-      nav: '首页',
-      navTitle: '首页',
+      nav: '文章',
+      navTitle: '文章',
+      faVisible: false,
+      user: {},
+      noReadCount: 0,
+      registerVisible: false,
+      loginVisible: false,
     };
   }
   componentDidMount() {
@@ -28,73 +35,110 @@ class Nav extends Component {
   }
 
   render() {
+    const token = localStorage.getItem('token');
+    const userId = localStorage.getItem('userId');
+    const menuDown = (
+      <Menu>
+        <Menu.Item key='0'>
+          <Link to={ '/author/' + userId }>我的主页</Link>
+        </Menu.Item>
+        <Menu.Item key='1'>
+          <Link onClick={ this.userOut } to=''>
+            退出
+          </Link>
+        </Menu.Item>
+      </Menu>
+    );
+    // className={classNames(styles.tagCloud, className)}
     return (
-      // <div className='left'>
-      <Header
-        // className='header'
-        style={ {
-          position: 'fixed',
-          zIndex: 1,
-          top: 0,
-          width: '100%',
-          minWidth: '1200px',
-          height: '66px',
-          float: 'left',
-          backgroundColor: 'white',
-          borderBottom: '1px solid #eee',
-        } }>
-        <Row className={ styles.container }>
-          <Col span='4'>
-            <a href='http://xcwpup.top'>
-              <div className='logo '>
-                <img alt='' src={ logo } />
-              </div>
-            </a>
-          </Col>
-          <Col span='8'>
-            <Menu
-              defaultSelectedKeys={ ['1'] }
-              mode='horizontal'
-              onClick={ this.handleMenu }
-              selectedKeys={ [this.state.menuCurrent] }
-              style={ { lineHeight: '64px', borderBottom: 'none' } }
-              theme='light'>
-              <Menu.Item key='9'>
-                <Link to='/home'>
-                  <Icon theme='outlined' type='home' />
-                  首页
-                </Link>
-              </Menu.Item>
-              <Menu.Item key='1'>
-                <Link to='/articles'>
-                  <Icon theme='outlined' type='ordered-list' />
+      <Header className={ styles.headerNav }>
+        <div className={ styles.headerContent }>
+          <Menu
+            defaultSelectedKeys={ ['1'] }
+            mode='horizontal'
+            onClick={ this.handleMenu }
+            selectedKeys={ [this.state.menuCurrent] }>
+            <Menu.Item key='9'>
+              <Link to='/home'>
+                <Icon type='unordered-list' />
                   文章
+              </Link>
+            </Menu.Item>
+            <Menu.Item key='1'>
+              <Link to='/articles'>
+                <Icon type='user' />
+                  关于
+              </Link>
+            </Menu.Item>
+          </Menu>
+          <div>
+            {!token ? null : (
+              <Fragment>
+                <Link to={ '/msg/' + userId }>
+                  <Button
+                    onClick={ this.changeNum }
+                    type='link'>
+                    <Icon type='bell' />
+                    <Badge
+                      count={ this.state.noReadCount }
+                      style={ { boxShadow: '0 0 0 1px #d9d9d9 inset' } } />
+                  </Button>
                 </Link>
-              </Menu.Item>
-            </Menu>
-          </Col>
-          <Col span='6'>
-            <HeaderSearch
-              className={ `${styles.action} ${styles.search}` }
-              dataSource={ ['搜索提示一', '搜索提示二', '搜索提示三'] }
-              onPressEnter={ value => {
-                console.log('enter', value) // eslint-disable-line
-              } }
-              onSearch={ value => {
-                console.log('input', value) // eslint-disable-line
-              } }
-              // eslint-disable-next-line react/jsx-tag-spacing
-              placeholder='站内搜索'/>
-          </Col>
-          <Col span='4'>
-            <Button style={ { marginRight: 20 } } type='primary'>
-              Login in
-            </Button>
-            <Button type='primary'>Login out</Button>
-          </Col>
-        </Row>
+                <a href='###'>
+                  <Button onClick={ this.fabuModal } type='link'>
+                    <Icon type='edit' />
+                  </Button>
+                </a>
+              </Fragment>
+            )}
+
+            {token ? (
+              <Dropdown overlay={ menuDown } trigger={ ['click'] }>
+                <a
+                  className='ant-dropdown-link'
+                  href='https://www.baidu.com/'>
+                  <Button type='link'>
+                    <Icon type='usergroup-delete' />
+                  </Button>
+                </a>
+              </Dropdown>
+            ) : (
+              <div
+                style={ {
+                  display: 'flex',
+                  justifyContent: 'space-around',
+                } }>
+                <a className='ant-dropdown-link' href='###' onClick={ this.resModel }>
+                  <Button
+                    shape='round'
+                    size='small'
+                    style={ { marginRight: 10 } }
+                    type='primary'>
+                    注册
+                  </Button>
+                </a>
+                <a className='ant-dropdown-link' href='###' onClick={ this.loginModel }>
+                  <Button shape='round' size='small' type='primary'>
+                    登录
+                  </Button>
+                </a>
+              </div>
+            )}
+          </div>
+        </div>
+        <Fabu
+          onCancel={ this.fahandleCancel }
+          onSubmit={ this.fabu }
+          visible={ this.state.faVisible } />
+        <Registered
+          onCancel={ this.rehandleCancel }
+          onSubmit={ this.register }
+          visible={ this.state.registerVisible } />
+        <Login
+          onCancel={ this.loginhandleCancel }
+          onSubmit={ this.login }
+          visible={ this.state.loginVisible } />
       </Header>
-      // </div>
     );
   }
   initMenu(name) {
@@ -122,6 +166,122 @@ class Nav extends Component {
     this.setState({
       nav: key,
     });
+  }
+  fabu = values => {
+    axios
+      .post('/api/article/fabu', values)
+      .then(value => {
+        console.log(value.data.articles);
+        if (value.status === 200) {
+          if (value.data.success) {
+            message.success(value.data.message);
+            this.setState({
+              faVisible: false,
+              confirmLoading: false,
+              articels: value.data.articles,
+            });
+          }
+        }
+      })
+      .catch(value => {
+        console.log(value);
+        // console.log(2);
+      });
+  };
+  register = values => {
+    axios
+      .post('/api/user/zhuce', values)
+      .then(val => {
+        if (val.status === 200) {
+          if (val.data.success) {
+            return message.success(val.data.message);
+          }
+          return message.warning(val.data.message);
+        }
+      })
+      .catch(val => {
+        message.error(val.data.message);
+      });
+  };
+  login = values => {
+    axios
+      .post('/api/user/login', values)
+      .then(val => {
+        if (val.data.success) {
+          message.success(val.data.message);
+          localStorage.setItem('token', val.data.token);
+          localStorage.setItem('userId', val.data.userId);
+          localStorage.setItem('isOk', true);
+          this.setState({
+            loginVisible: false,
+          });
+          history.push('/');
+        } else {
+          message.warning(val.data.message);
+        }
+      })
+      .catch(val => {
+        console.log(val);
+        message.error('登录失败');
+      });
+  };
+  fabuModal = () => {
+    this.setState({
+      faVisible: true,
+    });
+  };
+  resModel = () => {
+    this.setState({
+      registerVisible: true,
+    });
+  };
+  loginModel = () => {
+    this.setState({
+      loginVisible: true,
+    });
+  };
+
+  fahandleCancel = e => {
+    console.log(e);
+    this.setState({
+      faVisible: false,
+    });
+  };
+  rehandleCancel = e => {
+    console.log(e);
+    this.setState({
+      registerVisible: false,
+    });
+  };
+  loginhandleCancel = e => {
+    console.log(e);
+    this.setState({
+      loginVisible: false,
+    });
+  };
+  userOut(e) {
+    e.preventDefault();
+    axios
+      .post('/api/user/out')
+      .then(val => {
+        if (val.data.success) {
+          message.success(val.data.message);
+          localStorage.setItem('token', val.data.token);
+          localStorage.setItem('userId', val.data.userId);
+          localStorage.setItem('isOk', false);
+          this.setState({
+            user: null,
+            noReadCount: 0,
+          });
+          history.push('/');
+        } else {
+          message.warning(val.data.message);
+        }
+      })
+      .catch(val => {
+        console.log(val);
+        message.error('退出失败');
+      });
   }
 }
 

@@ -21,7 +21,7 @@ class Layouts extends Component {
           <Layout className={ styles.layout }>
             <Content>
               <Layout style={ { padding: '24px 0', background: '#fff' } }>
-                <Content style={ { padding: '0 24px 0 0', minHeight: 280 } }>
+                <Content style={ { padding: '0 24px 0 0', minHeight: 1000 } }>
                   {this.props.children}
                 </Content>
               </Layout>
