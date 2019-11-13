@@ -3,17 +3,17 @@ import PropTypes from 'prop-types';
 import { Redirect, Route, Router, Switch } from 'react-router-dom';
 // import pathToRegexp from 'path-to-regexp';
 
-import Home from './Pages/Home';
 import Articles from './Pages/Articles';
+import AboutUs from './Pages/AboutUs';
 import BasicLayout from 'layouts/BasicLayout';
 
 const Routes = ({ history }) => (
   <Router history={ history }>
     <Switch>
       <BasicLayout>
-        <Route component={ Home } exact path='/home' />
         <Route component={ Articles } exact path='/articles' />
-        <Redirect exact from='/' to='/home' />
+        <Route component={ AboutUs } exact path='/about' />
+        <Redirect exact from='/' to='/articles' />
       </BasicLayout>
     </Switch>
   </Router>

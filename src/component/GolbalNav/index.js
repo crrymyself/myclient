@@ -59,13 +59,13 @@ class Nav extends Component {
             onClick={ this.handleMenu }
             selectedKeys={ [this.state.menuCurrent] }>
             <Menu.Item key='9'>
-              <Link to='/home'>
+              <Link to='/articles'>
                 <Icon type='unordered-list' />
                   文章
               </Link>
             </Menu.Item>
             <Menu.Item key='1'>
-              <Link to='/articles'>
+              <Link to='/about'>
                 <Icon type='user' />
                   关于
               </Link>
@@ -146,10 +146,10 @@ class Nav extends Component {
     let navTitle = '';
     if (name === '/') {
       key = '9';
-      navTitle = '首页';
-    } else if (name === '/articles') {
-      key = '1';
       navTitle = '文章';
+    } else if (name === '/about') {
+      key = '1';
+      navTitle = '关于';
     }
     this.setState({
       navTitle,
@@ -204,6 +204,7 @@ class Nav extends Component {
       });
   };
   login = values => {
+    const { history } = this.props;
     axios
       .post('/api/user/login', values)
       .then(val => {
@@ -259,8 +260,9 @@ class Nav extends Component {
       loginVisible: false,
     });
   };
-  userOut(e) {
+  userOut = e =>{
     e.preventDefault();
+    const { history } = this.props;
     axios
       .post('/api/user/out')
       .then(val => {
@@ -286,6 +288,7 @@ class Nav extends Component {
 }
 
 Nav.propTypes = {
+  history: PropTypes.object,
   pathname: PropTypes.string,
 };
 
