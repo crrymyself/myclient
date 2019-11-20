@@ -31,6 +31,26 @@ const routeConfig = [
     }),
   },
   {
+    name: 'article/:id',
+    path: '/article/:id',
+    exact: true,
+    component: Loadable({
+      loader: () => import('./Pages/Single'),
+      loading: loadingPage,
+      delay: 200,
+    }),
+  },
+  {
+    name: 'author/:userId',
+    path: '/author/:userId',
+    exact: true,
+    component: Loadable({
+      loader: () => import('./Pages/AuthorPage'),
+      loading: loadingPage,
+      delay: 200,
+    }),
+  },
+  {
     name: 'about',
     path: '/about',
     exact: true,

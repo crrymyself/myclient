@@ -20,7 +20,7 @@ class Layouts extends Component {
           <Nav pathname={ this.props.location.pathname } />
           <Layout className={ styles.layout }>
             <Content>
-              <Layout style={ { padding: '24px 0', background: '#fff' } }>
+              <Layout style={ { background: '#fff' } }>
                 <Content style={ { padding: '0 24px 0 0', minHeight: 1000 } }>
                   {this.props.children}
                 </Content>

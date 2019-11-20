@@ -1,0 +1,24 @@
+.authorPage{
+  width: 100%;
+}
+.AuthorTitle{
+  width: 100%;
+  background: #f6f6f6;
+  overflow: hidden;
+}
+.authorTitle{
+  margin: 10px auto;
+  background-image:url("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1573398006456&di=ac1172840a7b977d3684e5811b51ecdf&imgtype=0&src=http%3A%2F%2Fimg1.lotour.com%2Fmudidi%2F201302%2F378545_665.jpg");
+  background-position: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: 0 1px 3px rgba(26,26,26,.1);
+}
+.authorContent{
+  box-shadow: 0 1px 3px rgba(26,26,26,.1);
+}
+.authorArticles{
+  padding: 13px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(26,26,26,.1);
+}

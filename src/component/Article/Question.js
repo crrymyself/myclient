@@ -1,7 +1,10 @@
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable react/prop-types */
+// Link,
+
 import React, { Component } from 'react';
+import {  Link } from 'react-router-dom';
 import { message, List, Avatar, Icon } from 'antd';
 import axios from 'axios/index';
 
@@ -62,7 +65,10 @@ class MyComponent extends Component {
               <List.Item.Meta
                 avatar={ <Avatar src={ item.avatar } /> }
                 description={ item.description }
-                title={ <a href={ '/article/' + item._id }>{item.title}</a> } />
+                title={
+                  <Link to={ '/article/' + item._id }>
+                    {item.title}
+                  </Link> } />
               {item.content}
             </List.Item>
           ) }
