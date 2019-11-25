@@ -6,8 +6,7 @@ class Commoent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      comment: {} || this.props.comment,
-      comments: [],
+      comment: this.props.comment,
     };
   }
   componentDidMount() {

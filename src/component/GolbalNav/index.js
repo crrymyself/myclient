@@ -1,17 +1,26 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable consistent-return */
 import React, { Component, Fragment } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Layout, Icon, Menu, Button, Badge, Dropdown, message } from 'antd';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import axios from 'axios';
 
 import Fabu from 'component/Article/Fabu';
 import Registered from 'component/User/Registered';
 import Login from 'component/User/Login';
 import styles from './index.module.scss';
+import { postLogin } from 'modules/user/action';
 
 const { Header } = Layout;
 
+@connect(
+  () => ({}),
+  dispatch => ({
+    onPostLogin: (payload, cb) => dispatch(postLogin.start(payload, cb)),
+  }),
+)
 class Nav extends Component {
   constructor(props) {
     super(props);
@@ -204,27 +213,34 @@ class Nav extends Component {
       });
   };
   login = values => {
-    const { history } = this.props;
-    axios
-      .post('/api/user/login', values)
-      .then(val => {
-        if (val.data.success) {
-          message.success(val.data.message);
-          localStorage.setItem('token', val.data.token);
-          localStorage.setItem('userId', val.data.userId);
-          localStorage.setItem('isOk', true);
-          this.setState({
-            loginVisible: false,
-          });
-          history.push('/');
-        } else {
-          message.warning(val.data.message);
-        }
-      })
-      .catch(val => {
-        console.log(val);
-        message.error('登录失败');
+    const { history, onPostLogin } = this.props;
+    const that = this;
+    onPostLogin(values, () => {
+      that.setState({
+        loginVisible: false,
       });
+      history.push('/');
+    });
+    // axios
+    //   .post('/api/user/login', values)
+    //   .then(val => {
+    //     if (val.data.success) {
+    //       message.success(val.data.message);
+    //       localStorage.setItem('token', val.data.token);
+    //       localStorage.setItem('userId', val.data.userId);
+    //       localStorage.setItem('isOk', true);
+    //       this.setState({
+    //         loginVisible: false,
+    //       });
+    //       history.push('/');
+    //     } else {
+    //       message.warning(val.data.message);
+    //     }
+    //   })
+    //   .catch(val => {
+    //     console.log(val);
+    //     message.error('登录失败');
+    //   });
   };
   fabuModal = () => {
     this.setState({

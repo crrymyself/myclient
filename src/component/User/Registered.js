@@ -187,7 +187,7 @@ class MyComponent extends Component {
   getVerify = () => {
     const num = this.state.num;
     axios
-      .get('/zhuce/getNum', {
+      .get('/api/zhuce/getNum', {
         params: num,
       })
       .then(val => {

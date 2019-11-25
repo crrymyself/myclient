@@ -4,6 +4,7 @@ import { Form, Input, Icon, Row, Col, Button, Modal } from 'antd';
 
 const FormItem = Form.Item;
 
+@Form.create()
 class LoginSection extends Component {
   constructor(props) {
     super(props);
@@ -124,7 +125,7 @@ class LoginSection extends Component {
     }
   }
 }
-LoginSection = Form.create({})(
-  LoginSection
-);
+// LoginSection = Form.create({})(
+//   LoginSection
+// );
 export default LoginSection;

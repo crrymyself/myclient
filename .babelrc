@@ -21,6 +21,12 @@
           "<helpers>": "./test/helpers.js"
         }
       }
+    ],
+    [
+      "@babel/plugin-proposal-decorators",
+      {
+        "legacy": true
+      }
     ]
   ]
 }
