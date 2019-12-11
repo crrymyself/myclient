@@ -198,7 +198,6 @@ class SingleArticle extends Component {
                                 this,
                                 this.state.articel.author._id
                               ) }
-                              style={ { width: '100%' } }
                               type='primary'>
                               取消关注
                             </Button>
@@ -357,7 +356,7 @@ class SingleArticle extends Component {
     );
   }
   async getArticel(path) {
-    const res = await axios.get(`/api/${path}`);
+    const res = await axios.get(`/api${path}`);
     console.log('res---', res);
     const resDate = res.data;
     if (res.state === 400) {
