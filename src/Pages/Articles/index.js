@@ -1,52 +1,41 @@
-/* eslint-disable consistent-return */
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import {  withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import axios from 'axios';
-import { message } from 'antd';
+import { connect } from 'react-redux';
 
 
-import ContentTag from 'component/Article/ContentTag';
+import { getArticles } from 'modules/articles/action';
 
-class Articles extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      articels: [],
-    };
-  }
-  componentDidMount() {
-    this.getArticelData();
-  }
 
-  // componentWillReceiveProps(nextProps) {
-  // }
+import Question from 'component/Article/Question';
 
-  render() {
-    // console.log(this.state.articels);
-    return (
-      <ContentTag  articles={ this.state.articels } />
-    );
-  }
+const  Articles  =  ({  articles, getDate }) => {
+  useEffect(() => {
+    getDate();
+  }, []);
 
-  getArticelData = () => {
-    const that = this;
-    axios.get('/api/getDate').then(res => {
-      // console.log('data', data);
-      const { data } = res;
-      if (data.success) {
-        that.setState({
-          articels: data.data,
-        });
-      }
-    }).catch(val => {
-      message.error(val.data.message);
-    });
-  }
-}
-
-Articles.propTypes = {
-  history: PropTypes.object,
+  return (
+    <Question  articles={ articles } />
+  );
 };
 
-export default withRouter(Articles);
+Articles.propTypes = {
+  articles: PropTypes.array,
+  getDate: PropTypes.func,
+  history: PropTypes.object,
+  isLoading: PropTypes.bool,
+};
+
+
+const NewArticles = connect(
+  state => ({
+    isLoading: state.articles.loading,
+    articles: state.articles.articles,
+  }),
+  dispatch => ({
+    getDate: (payload, cb) => dispatch(getArticles.start(payload, cb)),
+  }),
+)(Articles);
+
+
+export default withRouter(NewArticles);
