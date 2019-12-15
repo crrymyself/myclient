@@ -13,7 +13,6 @@ function* onGetArticles({ payload, cb }) {
   try {
     const val = yield call(fetchArticles, payload);
     if (val.data.success) {
-      message.success(val.data.message);
       yield put(getArticles.success(val.data.data));
       cb && cb();
     } else {

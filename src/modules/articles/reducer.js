@@ -4,7 +4,6 @@ const defaultState = {
 };
 
 export default (state = defaultState, action) => {
-  console.log('sss', action);
   switch (action.type) {
     case 'GET_ARTICLES_START':
       return { ...state, loading: true };
