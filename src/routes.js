@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
-import {  Redirect, Route, Router, Switch } from 'react-router-dom';
+import { /* Redirect, */ Route, Router, Switch } from 'react-router-dom';
 // import { ConnectedRouter } from 'connected-react-router';
 // import pathToRegexp from 'path-to-regexp';
 import Loadable from 'react-loadable';
@@ -20,6 +20,16 @@ const loadingPage = ({ error, pastDelay }) => {
 };
 
 const routeConfig = [
+  {
+    name: '/',
+    path: '/',
+    exact: true,
+    component: Loadable({
+      loader: () => import('./Pages/Articles'),
+      loading: loadingPage,
+      delay: 200,
+    }),
+  },
   {
     name: 'articles',
     path: '/articles',
@@ -64,6 +74,15 @@ const routeConfig = [
 const Routes = ({ history }) => (
   <Router history={ history }>
     <Switch>
+      {/* {
+        routeConfig.map((r, key)=> (
+          <Route
+            component={ r.component }
+            exact={ !!r.exact }
+            key={ key }
+            path={ r.path } />
+        ))
+      } */}
       <BasicLayout>
         {
           routeConfig.map((r, key)=> (
@@ -74,7 +93,7 @@ const Routes = ({ history }) => (
               path={ r.path } />
           ))
         }
-        <Redirect exact from='/' to='/articles' />
+        {/* <Redirect exact from='/' to='/articles' /> */}
       </BasicLayout>
     </Switch>
   </Router>
