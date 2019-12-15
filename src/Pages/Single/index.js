@@ -29,7 +29,7 @@ const  SingleArticle = ({ history, form }) => {
 
   const path = history.location && history.location.pathname;
   const UserToken = localStorage.getItem('token');
-  const ArticleToken = this.state.articel.author.token;
+  const ArticleToken = articel.author && articel.author.token;
 
   useEffect(() => {
     getArticel(path);
