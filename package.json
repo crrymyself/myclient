@@ -70,7 +70,7 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "set GENERATE_SOURCEMAP=false&& node scripts/build.js",
+    "build": "cross-env GENERATE_SOURCEMAP=false node scripts/build.js",
     "test": "node scripts/test.js"
   },
   "browserslist": {
@@ -138,6 +138,7 @@
     "babel-plugin-import": "^1.12.2",
     "babel-plugin-module-resolver": "^3.2.0",
     "babel-plugin-transform-runtime": "^6.23.0",
+    "cross-env": "^6.0.3",
     "eslint-import-resolver-babel-module": "^5.1.0",
     "http-proxy-middleware": "^0.20.0",
     "node-sass": "^4.12.0",
