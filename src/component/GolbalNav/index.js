@@ -1,15 +1,47 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable no-irregular-whitespace */
 import React, { Fragment, useState, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Layout, Icon, Menu, Button, Badge, Dropdown, message } from 'antd';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import Loadable from 'react-loadable';
 
-import Fabu from 'component/Article/Fabu';
-import Registered from 'component/User/Registered';
-import Login from 'component/User/Login';
+// import Fabu from 'component/Article/Fabu';
+// import Registered from 'component/User/Registered';
+// import Login from 'component/User/Login';
 import styles from './index.module.scss';
 import { postLogin } from 'modules/user/action';
+
+
+const loadingPage = ({ error, pastDelay }) => {
+  if (error) {
+    return (
+      <div>Error!</div>
+    );
+  } else if (pastDelay) {
+    return <div />;
+  }
+  return null;
+};
+
+const Fabu = Loadable({
+  loader: () => import('../../component/Article/Fabu'),
+  loading: loadingPage,
+  delay: 200,
+});
+const Registered = Loadable({
+  loader: () => import('../../component/User/Registered'),
+  loading: loadingPage,
+  delay: 200,
+});
+const Login = Loadable({
+  loader: () => import('../../component/User/Login'),
+  loading: loadingPage,
+  delay: 200,
+});
+
 
 const { Header } = Layout;
 
