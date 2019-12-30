@@ -181,7 +181,6 @@ const  Nav  =  ({ pathname, history, onPostLogin  }) =>  {
       </Menu.Item>
     </Menu>
   );
-    // className={classNames(styles.tagCloud, className)}
   return (
     <Header className={ styles.headerNav }>
       <div className={ styles.headerContent }>

@@ -53,7 +53,7 @@ const  Question = ({ articles }) => {
             extra={
               <img
                 alt='logo'
-                src='https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png'
+                src='https://p.upyun.com/demo/webp/webp/animated-gif-0.webp'
                 width={ 272 } />
             }
             key={ item.title }>
