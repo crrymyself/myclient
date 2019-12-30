@@ -11,9 +11,27 @@ import Loadable from 'react-loadable';
 // import Fabu from 'component/Article/Fabu';
 // import Registered from 'component/User/Registered';
 // import Login from 'component/User/Login';
-import styles from './index.module.scss';
 import { postLogin } from 'modules/user/action';
 
+
+const headerNavCss = {
+  background: '#fff',
+  padding: '5px 0',
+  marginBottom: '5px',
+  position: 'fixed',
+  top: 0,
+  width: '100%',
+  boxShadow: '0 1px 3px rgba(26,26,26,.1)',
+  zIndex: 100,
+  overflow: 'hidden',
+};
+const headerContentCss = {
+  width: '70%',
+  margin: '0 auto',
+  display: 'flex',
+  justifyContent: 'space-between',
+  padding: '0 20px',
+};
 
 const loadingPage = ({ error, pastDelay }) => {
   if (error) {
@@ -182,8 +200,8 @@ const  Nav  =  ({ pathname, history, onPostLogin  }) =>  {
     </Menu>
   );
   return (
-    <Header className={ styles.headerNav }>
-      <div className={ styles.headerContent }>
+    <Header style={ headerNavCss }>
+      <div style={ headerContentCss }>
         <Menu
           defaultSelectedKeys={ ['1'] }
           mode='horizontal'
