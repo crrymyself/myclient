@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { /* Redirect, */ Route, Router, Switch } from 'react-router-dom';
+import { Result, Spin  } from 'antd';
 // import { ConnectedRouter } from 'connected-react-router';
 // import pathToRegexp from 'path-to-regexp';
 import Loadable from 'react-loadable';
@@ -11,10 +12,12 @@ import BasicLayout from 'layouts/BasicLayout';
 const loadingPage = ({ error, pastDelay }) => {
   if (error) {
     return (
-      <div>Error!</div>
+      <Result
+        status='warning'
+        title='页面加载错误，请刷新页面' />
     );
   } else if (pastDelay) {
-    return <div />;
+    return (<Spin size='large' />);
   }
   return null;
 };

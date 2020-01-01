@@ -2,7 +2,10 @@ import React from 'react';
 import { Layout, BackTop } from 'antd';
 import PropTypes from 'prop-types';
 
+import Loadable from 'utils/loading';
 import Nav from 'component/GolbalNav';
+
+const RouterContent = Loadable(() => import('./Content'));
 
 const { Content, Footer } = Layout;
 
@@ -20,7 +23,9 @@ const Layouts = ({ children, location }) => {
         <Content>
           <Layout style={ { background: '#fff' } }>
             <Content style={ { padding: '0 24px 0 0', minHeight: 1000 } }>
-              {children}
+              <RouterContent>
+                {children}
+              </RouterContent>
             </Content>
           </Layout>
         </Content>

@@ -9,13 +9,13 @@ import { getArticles } from 'modules/articles/action';
 
 import Question from 'component/Article/Question';
 
-const  Articles  =  ({  articles, getDate }) => {
+const  Articles  =  ({  articles, getDate, isLoading }) => {
   useEffect(() => {
     getDate();
   }, []);
 
   return (
-    <Question  articles={ articles } />
+    <Question articles={ articles }  loading={ isLoading } />
   );
 };
 

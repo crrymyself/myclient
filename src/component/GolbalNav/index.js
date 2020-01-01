@@ -1,65 +1,18 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-irregular-whitespace */
 import React, { Fragment, useState, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Layout, Icon, Menu, Button, Badge, Dropdown, message } from 'antd';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import Loadable from 'react-loadable';
 
-// import Fabu from 'component/Article/Fabu';
-// import Registered from 'component/User/Registered';
-// import Login from 'component/User/Login';
 import { postLogin } from 'modules/user/action';
+import styles from './index.module.scss';
+import Loadable from 'utils/loading';
 
 
-const headerNavCss = {
-  background: '#fff',
-  padding: '5px 0',
-  marginBottom: '5px',
-  position: 'fixed',
-  top: 0,
-  width: '100%',
-  boxShadow: '0 1px 3px rgba(26,26,26,.1)',
-  zIndex: 100,
-  overflow: 'hidden',
-};
-const headerContentCss = {
-  width: '70%',
-  margin: '0 auto',
-  display: 'flex',
-  justifyContent: 'space-between',
-  padding: '0 20px',
-};
-
-const loadingPage = ({ error, pastDelay }) => {
-  if (error) {
-    return (
-      <div>Error!</div>
-    );
-  } else if (pastDelay) {
-    return <div />;
-  }
-  return null;
-};
-
-const Fabu = Loadable({
-  loader: () => import('../../component/Article/Fabu'),
-  loading: loadingPage,
-  delay: 200,
-});
-const Registered = Loadable({
-  loader: () => import('../../component/User/Registered'),
-  loading: loadingPage,
-  delay: 200,
-});
-const Login = Loadable({
-  loader: () => import('../../component/User/Login'),
-  loading: loadingPage,
-  delay: 200,
-});
-
+const Fabu = Loadable(() => import('../../component/Article/Fabu'));
+const Registered = Loadable(() => import('../../component/User/Registered'));
+const Login = Loadable(() => import('../../component/User/Login'));
 
 const { Header } = Layout;
 
@@ -200,8 +153,8 @@ const  Nav  =  ({ pathname, history, onPostLogin  }) =>  {
     </Menu>
   );
   return (
-    <Header style={ headerNavCss }>
-      <div style={ headerContentCss }>
+    <Header className={ styles.headerNavCss }>
+      <div className={ styles.headerContentCss }>
         <Menu
           defaultSelectedKeys={ ['1'] }
           mode='horizontal'

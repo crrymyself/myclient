@@ -17,7 +17,7 @@ IconText.propTypes = {
   type: PropTypes.string,
 };
 
-const  Question = ({ articles }) => {
+const  Question = ({ articles, loading }) => {
   const [isZanUp, setZanUp] = useState(true);
   const [isCollection, setCollection] = useState(true);
   return (
@@ -25,6 +25,7 @@ const  Question = ({ articles }) => {
       <List
         dataSource={ articles }
         itemLayout='vertical'
+        loading={ loading }
         pagination={ {
           onChange: page => {
             console.log(page);
@@ -106,6 +107,7 @@ const  Question = ({ articles }) => {
 
 Question.propTypes = {
   articles: PropTypes.array,
+  loading: PropTypes.bool,
 };
 
 export default Question;
